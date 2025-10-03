@@ -1,0 +1,89 @@
+<ion-header [translucent]="true" id="dark_backgrounded" class="ion-no-border">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-title color="primary"><img id="app-logo" class="inner-page" src="../../assets/images/logo.png" alt="Site Logo"
+          height="35px"></ion-title>
+      <ion-button (click)="goToShipments()">
+        <ion-icon name="arrow-undo-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin ion-padding">
+  <div id="content-inner">
+    <div class="greetings">
+      <ion-text color="primary">
+        <h1 class="dark-blue ion-text-start title ion-margin">{{status}} Shipments</h1>
+      </ion-text>
+      <ion-icon name="cube-outline" color="warning"></ion-icon>
+    </div>
+
+    <div class="ion-text-center ion-margin-vertical" *ngIf="searchingFlag">
+      <ion-text color="secondary">
+        <ion-spinner class="icon-vcenter" color="secondary" name="bubbles"></ion-spinner>
+        Searching Shipment...
+      </ion-text>
+    </div>
+    <div class="error-message ion-text-center ion-margin-bottom" *ngIf="errorMessage">
+      <ion-text>
+        <ion-icon name="alert" class="icon-vcenter"></ion-icon>
+        {{errorMessage}}
+      </ion-text>
+    </div>
+
+    <div *ngIf="!searchingFlag && !searchedList">
+      <section class="inner-list" *ngFor="let shipment of shipments" lines="full">
+        <div class="details content-0 greetings">
+          <div class="details content-1">
+            <div class="mopving-truck">
+              <h5 class="dark-blue ion-text-start title ion-margin">{{shipment.post_title}}</h5>
+              <div class="buttons">
+                <p class="package-details" (click)="viewDetails( shipment.ID )">SIGN</p>
+                <p class="package-details" (click)="trackDetails(shipment.ID)">VIEW</p>
+              </div>
+            </div>
+            <p class="package-details ion-padding-left ion-margin-left"
+              *ngFor="let package of shipment.shipment_packages">
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-weight']">{{package['wpc-pm-weight']}} Kg |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-length']">{{package['wpc-pm-length']}} cm |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-height']">{{package['wpc-pm-height']}} cm |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-height']">{{package['wpc-pm-height']}} cm</span>
+            </p>
+            <p class="package-details">From: {{shipment.wpcargo_shipper_address}}</p>
+            <p class="package-details">To: {{shipment.wpcargo_receiver_address}}</p>
+          </div>
+        </div>
+
+        <div class="tracking-record">
+          <ion-icon name="storefront" color="primary" class="pickup-point"></ion-icon>
+          <div class="travel-inner">
+            <div class="car-inner">
+              <div class="carbody">
+                <div class="carbody-1">
+                  <p class="small-text">COLEX</p>
+                </div>
+                <div class="carbody-2"></div>
+              </div>
+              <div class="carcycle">
+                <div class="carcycle-1"></div>
+                <div class="carcycle-2"></div>
+              </div>
+            </div>
+          </div>
+          <hr class="road" />
+          <ion-icon name="cube" color="primary" class="dropoff-point"></ion-icon>
+        </div>
+
+        <div class="status">
+          <h5 class="dark-blue ion-text-center ion-text-uppercase title ion-margin">{{shipment.status}}</h5>
+        </div>
+      </section>
+    </div>
+  </div>
+</ion-content>

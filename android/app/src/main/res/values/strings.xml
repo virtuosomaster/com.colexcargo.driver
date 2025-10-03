@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Colex Cargo Driver App</string>
+    <string name="title_activity_main">Colex Cargo Driver App</string>
+    <string name="package_name">com.colexcargo.driver</string>
+    <string name="custom_url_scheme">com.colexcargo.driver</string>
+</resources>

@@ -1,0 +1,185 @@
+<ion-header [translucent]="true" id="dark_backgrounded">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-button routerLink="/home/accounts">
+        <img class="logout" src="../../../assets/images/logout.png" alt="Site Logo">
+      </ion-button>
+      <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+        (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Search Shipment" showCancelButton="never"
+        [(ngModel)]="search"></ion-searchbar>
+    </ion-buttons>
+    <!-- <ion-title>My Parcel</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin">
+  <div class="searched-shipments" *ngIf="searchedList" id="content-inner">
+    <section class="inner-list" *ngFor="let shipment of searchedList" lines="full">
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="8">
+            <h5 class="white ion-text-uppercase">{{shipment.shipment_number}}</h5>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-light ion-text-uppercase"
+                shape="default" size="small">{{shipment.wpcargo_status}}</ion-button></ion-col>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row">
+          <ion-col size="7">
+            <p class="text-large ion-text-uppercase">{{shipment.wpcargo_receiver_name}}</p>
+          </ion-col>
+          <ion-col size="5" class="ion-text-right">
+            <p class="text-large">{{shipment.current_date | date: 'MMM dd yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-start padded-row">
+          <ion-col size="7">
+            <p class="text-small">{{shipment.wpcargo_receiver_phone}}</p>
+            <p class="text-small">{{shipment.wpcargo_receiver_address}}</p>
+          </ion-col>
+          <ion-col size="5" class="ion-text-right">
+            <div class="inner-buttons">
+              <ion-button class="wpc-button-sm-green ion-text-uppercase" shape="default" size="small"
+                (click)="trackDetails(shipment.ID)">View</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="padded-row" *ngIf="shipment.shipment_packages.length > 0">
+          <ion-col size="10" class="light-blue-indented">
+            <div class="package-fields" *ngFor="let package of shipment.shipment_packages">
+              <p class="label-sm-bold">Item Description</p>
+              <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-description']}}</p>
+              <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">No description for this item</p>
+
+              <div class="parcel-details">
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/weight-loss.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-weight']">{{package['wpc-pm-weight']}} Lbs</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-weight']">1 Lbs</p>
+                </div>
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/money.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-value']">{{package['wpc-pm-value']}} USD</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-value']">0.00 USD</p>
+                </div>
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/quality.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-qty']}}</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">1</p>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+  </div>
+
+  <div id="content-inner" *ngIf="!searchedList">
+    <ion-text color="clear">
+      <h1 class="dark-blue ion-text-start title ion-margin">SHIPMENTS</h1>
+    </ion-text>
+
+    <section class="main-page">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-green ion-text-uppercase"
+              shape="default" routerLink="/home/shipments">Active</ion-button></ion-col>
+          <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-blue ion-text-uppercase"
+              shape="default" routerLink="/home/cancelled">Cancelled</ion-button></ion-col>
+          <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-blue ion-text-uppercase"
+              shape="default" routerLink="/home/delivered">Delivered</ion-button></ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <section class="inner-list" *ngFor="let shipment of shipments" lines="full">
+        <ion-grid class="grid-with-background ion-no-padding">
+          <ion-row class="row-with-background ion-align-items-center">
+            <ion-col size="8">
+              <h5 class="white ion-text-uppercase">{{shipment.shipment_number}}</h5>
+            </ion-col>
+            <ion-col size="4" class="ion-text-right">
+              <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-light ion-text-uppercase"
+                  shape="default" size="small">{{shipment.wpcargo_status}}</ion-button></ion-col>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center padded-row">
+            <ion-col size="7">
+              <p class="text-large ion-text-uppercase">{{shipment.wpcargo_receiver_name}}</p>
+            </ion-col>
+            <ion-col size="5" class="ion-text-right">
+              <p class="text-large">{{shipment.current_date | date: 'MMM dd yyyy' }}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-start padded-row">
+            <ion-col size="7">
+              <p class="text-small">{{shipment.wpcargo_receiver_phone}}</p>
+              <p class="text-small">{{shipment.wpcargo_receiver_address}}</p>
+            </ion-col>
+            <ion-col size="5" class="ion-text-right">
+              <div class="inner-buttons">
+                <ion-button class="wpc-button-sm-blue ion-text-uppercase" shape="default" size="small"
+                  (click)="viewDetails(shipment.ID)">SIGN</ion-button>
+                <ion-button class="wpc-button-sm-green ion-text-uppercase" shape="default" size="small"
+                  (click)="trackDetails(shipment.ID)">View</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="padded-row">
+            <ion-col size="10" class="light-blue-indented">
+              <div class="package-fields" *ngFor="let package of shipment.shipment_packages">
+                <p class="label-sm-bold">Item Description</p>
+                <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-description']}}</p>
+                <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">No description for this item</p>
+
+                <div class="parcel-details">
+                  <div class="item-detail">
+                    <img class="item-icon" src="../../../assets/images/weight-loss.png" alt="Item icon">
+                    <p class="label-sm-indented" *ngIf="package['wpc-pm-weight']">{{package['wpc-pm-weight']}} Lbs</p>
+                    <p class="label-sm-indented" *ngIf="!package['wpc-pm-weight']">1 Lbs</p>
+                  </div>
+                  <div class="item-detail">
+                    <img class="item-icon" src="../../../assets/images/money.png" alt="Item icon">
+                    <p class="label-sm-indented" *ngIf="package['wpc-pm-value']">{{package['wpc-pm-value']}} USD</p>
+                    <p class="label-sm-indented" *ngIf="!package['wpc-pm-value']">0.00 USD</p>
+                  </div>
+                  <div class="item-detail">
+                    <img class="item-icon" src="../../../assets/images/quality.png" alt="Item icon">
+                    <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-qty']}}</p>
+                    <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">1</p>
+                  </div>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </section>
+    </section>
+
+    <div class="ion-text-center ion-margin-vertical" *ngIf="searchingFlag">
+      <ion-text color="warning">
+        <ion-icon name="hourglass-outline"></ion-icon>
+        Seaching Shipment...
+      </ion-text>
+    </div>
+    <div class="ion-text-center ion-margin-vertical no-result-found" *ngIf="noResultFlag">
+      <ion-text color="danger" large>
+        <ion-icon name="warning" style="font-size:18px;"></ion-icon>
+        No result Found.
+      </ion-text>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" class="ion-padding-top"
+      *ngIf="!searchingFlag && !searchedList">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more shipments">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

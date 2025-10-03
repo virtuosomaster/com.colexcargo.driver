@@ -1,0 +1,18 @@
+<div class="signature-pad">
+  <div class="signature-pad--body">
+    <canvas #sPad width="600" height="300" style="touch-action: none;" color="light"></canvas>
+  </div>
+</div>
+<ion-grid >
+    <ion-row>
+      <ion-col size="4">
+        <ion-button expand="full" color="success" (click)="savePNG()">Save</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" color="danger" (click)="clear()">Clear</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" color="medium" (click)="cancel()">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+</ion-grid>

@@ -1,0 +1,208 @@
+<ion-header [translucent]="true" id="dark_backgrounded" class="ion-no-border">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-button (click)="goToShipments()">
+        <ion-icon name="arrow-undo-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-title color="primary"><img id="app-logo" class="inner-page" src="../../assets/images/logo.png" alt="Site Logo"
+          height="35px"></ion-title>
+      <!-- <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+        (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Buscar Envío" showCancelButton="never"
+        [(ngModel)]="search"></ion-searchbar> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="searched-shipments" *ngIf="searchedList" id="content-inner">
+    <section class="inner-list" *ngFor="let shipment of searchedList" lines="full">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="8">
+            <h5 class="white ion-text-uppercase">{{shipment.shipment_number}}</h5>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-light ion-text-uppercase"
+                shape="default" size="small">{{shipment.wpcargo_status}}</ion-button></ion-col>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row">
+          <ion-col size="7">
+            <p class="text-large ion-text-uppercase">{{shipment.wpcargo_receiver_name}}</p>
+          </ion-col>
+          <ion-col size="5" class="ion-text-right">
+            <p class="text-large">{{shipment.current_date | date: 'MMM dd yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-start padded-row">
+          <ion-col size="7">
+            <p class="text-small">{{shipment.wpcargo_receiver_phone}}</p>
+            <p class="text-small">{{shipment.wpcargo_receiver_address}}</p>
+          </ion-col>
+          <ion-col size="5" class="ion-text-right">
+            <div class="inner-buttons">
+              <ion-button class="wpc-button-sm-green ion-text-uppercase" shape="default" size="small"
+                (click)="trackDetails(shipment.ID)">View</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="padded-row" *ngIf="shipment.shipment_packages.length > 0">
+          <ion-col size="10" class="light-blue-indented">
+            <div class="package-fields" *ngFor="let package of shipment.shipment_packages">
+              <p class="label-sm-bold">Item Description</p>
+              <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-description']}}</p>
+              <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">No description for this item</p>
+
+              <div class="parcel-details">
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/weight-loss.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-weight']">{{package['wpc-pm-weight']}} Lbs</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-weight']">1 Lbs</p>
+                </div>
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/money.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-value']">{{package['wpc-pm-value']}} USD</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-value']">0.00 USD</p>
+                </div>
+                <div class="item-detail">
+                  <img class="item-icon" src="../../../assets/images/quality.png" alt="Item icon">
+                  <p class="label-sm-indented" *ngIf="package['wpc-pm-description']">{{package['wpc-pm-qty']}}</p>
+                  <p class="label-sm-indented" *ngIf="!package['wpc-pm-description']">1</p>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+  </div>
+
+  <div id="content-inner" *ngIf="!searchedList">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-text color="clear">
+      <h1 class="dark-blue ion-text-start title ion-margin">{{shipmentFullData.shipment_number}}</h1>
+    </ion-text>
+
+    <section class="inner-list">
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="12">
+            <h5 class="white ion-text-uppercase">Proof of Delivery Signature</h5>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row">
+          <ion-col size="12" *ngIf="postData.signature != null">
+            <ion-icon color="danger" class="ion-float-right" name="trash-outline"
+              (click)="removeSignature()"></ion-icon>
+            <img src="{{ postData.signature }}" alt="signature">
+          </ion-col>
+          <ion-col size="12" class="ion-text-center">
+            <ion-button *ngIf="postData.signature == null" class="ion-text-uppercase" color="primary" expand="full"
+              (click)="presentModal()">Sign</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="12">
+            <h5 class="white ion-text-uppercase">Shipment Images & Attachments</h5>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row">
+          <ion-col size="12" class="ion-text-center">
+            <ion-button class="ion-text-uppercase" color="primary" expand="full" (click)="takeSnap()">
+              <ion-icon name="camera-outline" class="ion-margin-end"></ion-icon> Take Photo
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4" *ngFor="let img of capturedSnapURL; let i = index">
+            <ion-icon name="trash" class="trash-image" (click)="removeImage(i)"></ion-icon>
+            <ion-img [src]="img"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <form>
+        <ion-grid class="ion-no-padding">
+          <ion-row class="row-with-background ion-align-items-center">
+            <ion-col size="12">
+              <h5 class="white ion-text-uppercase">Update Shipment History</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="ion-padding">
+
+              <ion-grid class="underlined" *ngFor="let field of signFields | keyvalue">
+                <!-- <ion-row class="ion-padding-bottom">
+                  <ion-col size="12" class="ion-no-padding">
+                    <ion-label class="label-bold" position="stacked">{{field.value['label']}}</ion-label>
+                  </ion-col>
+                </ion-row> -->
+
+                <ion-row class="ion-no-padding ion-align-items-center">
+                  <ion-col size="12" class="ion-no-padding">
+                    <ion-checkbox *ngIf="field.value['field'] == 'text' && field.key == 'location'" labelPlacement="end"
+                      alignment="start" class="autofill_address" (ionChange)="locationAutocomplete($event)">
+                      <p class="checkbox-label">
+                        <span>Unset Autofill Address ?</span>
+                      </p>
+                    </ion-checkbox>
+                    <ion-input class="boxed-input" *ngIf="field.value['field'] == 'text' && field.key == 'location'"
+                      type="text" autocomplete="off" name="{{field.key}}" placeholder="Enter {{field.key}}"
+                      [(ngModel)]="autocomplete.input" value="{{addressValue}}"
+                      (ionInput)="UpdateSearchResults()"></ion-input>
+
+                    <ion-list id="searhed-list" [hidden]="autocompleteItems.length == 0"
+                      *ngIf="field.value['field'] == 'text' && field.key == 'location'">
+                      <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)"
+                        class="searched-item">
+                        <ion-icon class="ion-margin-end searched-icon" color="secondary" name="map-outline"></ion-icon>
+                        {{ item.description }}
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-select *ngIf="field.value['field'] == 'select'" placeholder="Select Status"
+                      name="{{field.key}}" okText="Select" cancelText="Dismiss" [(ngModel)]="postData[field.key]">
+                      <ion-select-option *ngFor="let option of field.value['options'] | keyvalue"
+                        value="{{option.value}}">{{option.value}}</ion-select-option>
+                    </ion-select>
+
+                    <ion-textarea *ngIf="field.value['field'] == 'textarea'" name="{{field.key}}"
+                      placeholder="Enter {{field.key}}" [(ngModel)]="postData[field.key]"></ion-textarea>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+          <ion-row class="ion-text-right">
+
+            <ion-col size="12">
+              <div class="two-buttons">
+                <ion-button class="ion-text-uppercase" shape="default" expand="full" color="primary" size="small"
+                  (click)="submitAction()">Save</ion-button>
+                <ion-button class="ion-text-uppercase" shape="default" expand="full" color="tertiary" size="small"
+                  (click)="goToShipments()">Back</ion-button>
+
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </section>
+  </div>
+</ion-content>

@@ -1,0 +1,8 @@
+<ion-tabs id="dark_backgrounded">
+  <ion-tab-bar #home slot="bottom" color="clear" class="ion-tab-heightened">
+    <ion-tab-button *ngFor="let p of tabBarPages" [tab]="p.tab" class="ion-no-background">
+      <ion-icon class="tab-icons" [name]="p.icon" class="horizon-icons"></ion-icon>
+      <!-- <ion-label class="tab-labels">{{ p.title }}</ion-label> -->
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,133 @@
+<ion-header [translucent]="true" id="dark_backgrounded" class="ion-no-border">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-title color="primary"><img id="app-logo" class="inner-page" src="../../assets/images/logo.png" alt="Site Logo"
+          height="35px"></ion-title>
+      <!-- <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+        (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Buscar Envío" showCancelButton="never"
+        [(ngModel)]="search"></ion-searchbar> -->
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class='ion-padding'>
+  <div class=header-content>
+    <div class="greetings">
+      <ion-text color="primary">
+        <h1 class="dark-blue ion-text-start title ion-margin">Hello, {{authUserFullname}}</h1>
+      </ion-text>
+      <ion-icon name="partly-sunny-outline" color="warning"></ion-icon>
+    </div>
+
+    <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+      (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Search Shipment" showCancelButton="never"
+      [(ngModel)]="search"></ion-searchbar>
+  </div>
+
+  <!-- Banner Shipment Section -->
+  <section class="shipment-dashboard ion-padding">
+    <div class="greetings">
+      <ion-text color="white">
+        <h3 class="dark-blue ion-text-start title ion-margin">Rapidité.</h3>
+        <h3 class="dark-blue ion-text-start title ion-margin">Fiabilité.</h3>
+        <h3 class="dark-blue ion-text-start title ion-margin">Simplicité.</h3>
+      </ion-text>
+      <ion-text>
+        <h4>Send, receive, and manage your deliveries quickly and securely!</h4>
+      </ion-text>
+      <ion-button class="ion-text-uppercase" shape="default" color="primary" size="small" (click)="openSite()">Visit
+        Site</ion-button>
+    </div>
+  </section>
+
+  <div class="searched-shipments" *ngIf="searchedList && searchingFlag == false">
+    <section class="inner-list" *ngFor="let shipment of searchedList">
+      <div class="display-latest-details">
+        <div class="details content-0 greetings">
+          <div class="details content-1">
+            <div class="mopving-truck">
+              <h5 class="dark-blue ion-text-start title ion-margin">{{shipment.post_title}}</h5>
+              <p class="package-details" (click)="viewDetails( shipment.ID )">View Details >></p>
+            </div>
+            <p class="package-details ion-padding-left ion-margin-left"
+              *ngFor="let package of shipment.shipment_packages">
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-weight']">{{package['wpc-pm-weight']}} Kg |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-length']">{{package['wpc-pm-length']}} cm |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-height']">{{package['wpc-pm-height']}} cm |
+              </span>
+              <span class="label-sm-indented" *ngIf="package['wpc-pm-height']">{{package['wpc-pm-height']}} cm</span>
+            </p>
+            <p class="package-details">From: {{shipment.wpcargo_shipper_address}}</p>
+            <p class="package-details">To: {{shipment.wpcargo_receiver_address}}</p>
+          </div>
+        </div>
+
+        <div class="tracking-record">
+          <ion-icon name="storefront" color="primary" class="pickup-point"></ion-icon>
+          <div class="travel">
+            <div class="car">
+              <div class="carbody">
+                <div class="carbody-1">
+                  <p class="small-text">COLEX</p>
+                </div>
+                <div class="carbody-2"></div>
+              </div>
+              <div class="carcycle">
+                <div class="carcycle-1"></div>
+                <div class="carcycle-2"></div>
+              </div>
+            </div>
+          </div>
+          <hr class="road" />
+          <ion-icon name="cube" color="primary" class="dropoff-point"></ion-icon>
+        </div>
+
+        <div class="status">
+          <h5 class="dark-blue ion-text-center ion-text-uppercase title ion-margin">{{shipment.status}}</h5>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Latest Shipment Section -->
+  <div *ngIf="!searchedList">
+    <!-- All status section -->
+    <section class="with-shipment-status ion-no-padding ion-margin-top">
+      <div class="greetings">
+        <ion-text color="primary">
+          <h1 class="dark-blue ion-text-start title ion-margin">Shipments by Status</h1>
+        </ion-text>
+        <ion-icon name="cube-outline" color="warning"></ion-icon>
+      </div>
+
+      <ion-grid>
+        <ion-row class="ion-no-padding">
+          <ion-col size="6" *ngFor="let shipment of shipments | keyvalue"
+            class="grid-with-background shadowed ion-padding">
+            <ion-grid class="ion-no-padding" color="primary">
+              <ion-row class="row-with-background ion-align-items-center ion-justify-content-center ion-no-padding">
+                <!-- <ion-col size="12" class="ion-text-right"> <ion-badge color="danger">{{shipment.value}}</ion-badge>
+                </ion-col> -->
+                <ion-col size="12" class="ion-text-center">
+                  <ion-icon name="barcode-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="12" class="ion-text-center">
+                  <h4 class="white ion-text-uppercase">{{shipment.key}}</h4>
+                </ion-col>
+                <ion-col size="12" class="ion-text-center ion-padding">
+                  <ion-button class="ion-text-uppercase" shape="default" size="small"
+                    (click)="viewShipment(shipment.key)" color="primary">View All ({{shipment.value}})
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+  </div>
+</ion-content>

@@ -1,0 +1,242 @@
+<ion-content padding='true' class = "backgrounded">
+  <div id="content-wrapper">
+    <div id = "logo-with-text" class = "ion-text-center">
+      <img id="app-logo" src="../../../assets/images/wpcargo-main.png" alt="Site Logo">
+    </div>
+
+    <section id = "section-main-content">
+      <form>
+        <div [ngSwitch]="authType">
+          <ng-template [ngSwitchCase]="'email'">
+            <div class = "welcome-text">
+              <h4 class = "smaller-text ion-text-uppercase ion-text-center">New to WPCargo ?</h4>
+              <h3 class = "bigger-text ion-text-uppercase ion-text-center">Create New Account</h3>
+            </div>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Email</ion-label>
+                </ion-col>
+              </ion-row>
+      
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/email.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="text" placeholder = "Enter Email Address" name="email"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+    
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Confirm Email</ion-label>
+                </ion-col>
+              </ion-row>
+      
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/email.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="text" placeholder = "Enter Email Address" name="email"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+    
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Password</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/padlock.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+    
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Confirm Password</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/padlock.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+    
+            <ion-grid>
+              <ion-row>
+                <ion-col size = "12" class = "ion-text-center">
+                  <ion-button fill = "solid" class = "wpc-button-green ion-text-uppercase" (click) = "Switchto('personal')">Next</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-template>
+
+          <ng-template  [ngSwitchCase]="'personal'" >
+            <div class = "welcome-text">
+              <h4 class = "smaller-text ion-text-uppercase ion-text-center">We'd like to know you</h4>
+              <h3 class = "bigger-text ion-text-uppercase ion-text-center">PErsonal Details</h3>
+            </div>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">First Name</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/user.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Last Name</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/user.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Address 1</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/earth.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">City</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/earth.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">State</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/earth.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Country</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/earth.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid class = "underlined">
+              <ion-row class = "ion-padding-bottom">
+                <ion-col size = "12" class = "ion-no-padding">
+                  <ion-label class = "label-bold" position="stacked">Postal Code</ion-label>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row class = "ion-no-padding ion-align-items-center">
+                <ion-col size = "1" class = "ion-no-padding">
+                  <img class="input-icon" src="../../../assets/images/earth.png" alt="icon">
+                </ion-col>
+                <ion-col size = "11" class = "ion-no-padding">
+                  <ion-input autocomplete="off" type="password" placeholder = "Enter Password" name="password"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col size = "12" class = "ion-text-center">
+                  <ion-button fill = "solid" class = "wpc-button-green ion-text-uppercase">Signup</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-template>
+        </div>
+      </form>
+    </section>
+
+    <div class = "welcome-text">
+      <h4 class = "smaller-text ion-text-uppercase ion-text-center">Already have an account?</h4>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size = "12" class = "ion-text-center">
+          <ion-button fill = "solid" class = "wpc-button-blue ion-text-uppercase" routerLink="/login">Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

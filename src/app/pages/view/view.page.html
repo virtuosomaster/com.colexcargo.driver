@@ -1,0 +1,210 @@
+<ion-header [translucent]="true" id="dark_backgrounded" class="ion-no-border">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-button (click)="goToShipments()">
+        <ion-icon name="arrow-undo-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-title color="primary"><img id="app-logo" class="inner-page" src="../../assets/images/logo.png" alt="Site Logo"
+          height="35px"></ion-title>
+      <!-- <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+        (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Buscar Envío" showCancelButton="never"
+        [(ngModel)]="search"></ion-searchbar> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-margin ion-padding">
+  <div class="ion-text-center ion-margin-vertical" *ngIf="!onLoad">
+    <ion-text color="secondary">
+      <ion-icon name="hourglass-outline"></ion-icon>
+      Preparing shipment data...
+    </ion-text>
+  </div>
+
+  <div id="content-inner" *ngIf="!searchedList && onLoad">
+    <section class="inner-list">
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="8">
+            <h5 class="white ion-text-uppercase">{{shipmentData.shipment_number}}</h5>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <ion-col size="4" class="ion-text-center"><ion-button class="wpc-button-sm-light ion-text-uppercase"
+                shape="default" size="small">{{shipmentData.wpcargo_status}}</ion-button></ion-col>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-start padded-row"
+          *ngIf="shipmentData.details['origin'] || shipmentData.details['departure']">
+          <!-- *ngIf="shipmentData.details.length > 0" -->
+          <ion-col size="6" *ngIf="shipmentData.details['origin']">
+            <p class="text-label-small ion-text-uppercase">Origin</p>
+            <p class="text-large ion-text-uppercase">{{shipmentData.details['origin']}}</p>
+          </ion-col>
+          <ion-col size="6" *ngIf="shipmentData.details['departure']">
+            <p class="text-label-small ion-text-uppercase">DEPARTURE DATE</p>
+            <p class="text-large">{{shipmentData.details['departure'] | date: 'MMM dd yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-start padded-row"
+          *ngIf="shipmentData.details['destination'] || shipmentData.details['arrival']">
+          <!-- *ngIf="shipmentData.details.length > 0" -->
+          <ion-col size="6" *ngIf="shipmentData.details['destination']">
+            <p class="text-label-small ion-text-uppercase">Destination</p>
+            <p class="text-large ion-text-uppercase">{{shipmentData.details['destination']}}</p>
+          </ion-col>
+          <ion-col size="6" *ngIf="shipmentData.details['arrival']">
+            <p class="text-label-small ion-text-uppercase">Delivery DATE</p>
+            <p class="text-large ion-text-uppercase">{{shipmentData.details['arrival'] | date: 'MMM dd yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+        <!-- Dynamic Custom Fields -->
+        <ion-grid *ngFor="let section of shipmentAllData" class="grid-with-background ion-no-padding">
+          <ion-row class="row-with-background ion-align-items-center" [attr.data-sectionIndex]="section.sectionIndex" (click)="handleClick($event)">
+            <ion-col size="11">
+              <h5 class="white ion-text-uppercase">{{ section.sectionLabel }}</h5>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="section.sectionView" class="ion-align-items-center padded-row">
+            <ion-col size="12">
+              <div class="text-label-flex" *ngFor="let field of section.sectionData">
+                <p class="text-label-small ion-text-uppercase">{{ field.label }}</p>
+                <p class="text-label-big" style="margin-bottom: 0.3rem !important;">{{ field.value || 'N/A' }}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center" (click)="hidePackage()">
+          <ion-col size="11">
+            <h5 class="white ion-text-uppercase">Parcel Weight & Dimension Details</h5>
+          </ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon [name]="viewPackageIcon" color="light"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row" *ngIf="viewPackage == true">
+          <ion-col size="12" *ngFor="let package of shipmentData.shipment_packages">
+            <div class="text-label-flex" *ngIf="package['wpc-pm-description']">
+              <p class="text-label-small ion-text-uppercase">Item Description</p>
+              <p class="text-label-big">{{package['wpc-pm-description']}}</p>
+            </div>
+            <div class="text-label-flex" *ngIf="package['wpc-pm-piece-type']">
+              <p class="text-label-small ion-text-uppercase">Piece Type</p>
+              <p class="text-label-big">{{package['wpc-pm-piece-type']}}</p>
+            </div>
+            <table id="package_fields" class="tbl">
+              <thead>
+                <th *ngIf="package['wpc-pm-qty']" class="text-label-small ion-text-uppercase">QTY</th>
+                <th *ngIf="package['wpc-pm-width']" class="text-label-small ion-text-uppercase">WIDTH</th>
+                <th *ngIf="package['wpc-pm-length']" class="text-label-small ion-text-uppercase">LENGTH</th>
+                <th *ngIf="package['wpc-pm-height']" class="text-label-small ion-text-uppercase">HEIGHT</th>
+                <th *ngIf="package['wpc-pm-weight']" class="text-label-small ion-text-uppercase">WEIGHT</th>
+                <th *ngIf="package['wpc-pm-value']" class="text-label-small ion-text-uppercase">VALUE</th>
+              </thead>
+              <tbody>
+                <td *ngIf="package['wpc-pm-qty']" class="text-label-big">{{package['wpc-pm-qty']}}</td>
+                <td *ngIf="package['wpc-pm-width']" class="text-label-big">{{package['wpc-pm-width']}}</td>
+                <td *ngIf="package['wpc-pm-length']" class="text-label-big">{{package['wpc-pm-length']}}</td>
+                <td *ngIf="package['wpc-pm-height']" class="text-label-big">{{package['wpc-pm-height']}}</td>
+                <td *ngIf="package['wpc-pm-weight']" class="text-label-big">{{package['wpc-pm-weight']}}</td>
+                <td *ngIf="package['wpc-pm-value']" class="text-label-big">{{package['wpc-pm-value']}}</td>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center" (click)="hideImages()">
+          <ion-col size="11">
+            <h5 class="white ion-text-uppercase">Shipment Images & Attachments</h5>
+          </ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon [name]="viewImagesIcon" color="light"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row" *ngIf="hasCaptured && viewImages == true">
+          <ion-col class="ion-padding" size="8" *ngFor="let imgURL of shipmentData.pod_images">
+            <!-- <img src="{{imgURL['url']}}" alt="Captured Image" (click)="zoomPhoto(imgURL['url'])"> -->
+            <img src="{{imgURL}}" alt="Captured Image" (click)="zoomPhoto(imgURL)">
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row" *ngIf="!hasCaptured && viewImages == false">
+          <p class="text-label-big ion-text-center">No Image or Attachment added.</p>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center" (click)="hideSignature()">
+          <ion-col size="11">
+            <h5 class="white ion-text-uppercase">Proof of Delivery Signature</h5>
+          </ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon [name]="viewSignatureIcon" color="light"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row" *ngIf="hasSignature && viewSignature == true">
+          <ion-col class="ion-padding" size="8">
+            <img src="{{shipmentData.pod_signature}}" alt="Signature Image"
+              (click)="zoomPhoto(shipmentData.pod_signature)">
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row" *ngIf="!hasCaptured && viewSignature == true">
+          <p class="text-label-big ion-text-center">No Signature added.</p>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center" (click)="hideHistory()">
+          <ion-col size="11">
+            <h5 class="white ion-text-uppercase">Shipment Tracking & History</h5>
+          </ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon [name]="viewHistoryIcon" color="light"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row history" *ngIf="viewHistory == true">
+          <ion-col size="12">
+            <table id="history" *ngIf="shipmentData.history.length > 0;" class="tbl">
+              <thead>
+                <th class="text-label-small ion-text-uppercase">Date</th>
+                <th class="text-label-small ion-text-uppercase">Location</th>
+                <th class="text-label-small ion-text-uppercase">Remarks</th>
+                <th class="text-label-small ion-text-uppercase">Status</th>
+              </thead>
+              <tr *ngFor="let history of shipmentData.history">
+                <td>
+                  <span class="text-label-small" *ngIf="history.date.length > 0">{{history.date | date: 'MMM
+                    dd yyyy'}}</span>
+                </td>
+                <td>
+                  <span class="text-label-small" *ngIf="history.location.length > 0">{{history.location}}</span>
+                </td>
+                <td>
+                  <span class="text-label-small" *ngIf="history.remarks.length > 0">{{history.remarks}}</span>
+                </td>
+                <td>
+                  <span class="text-label-small" *ngIf="history.status.length > 0">{{history.status}}</span>
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+  </div>
+</ion-content>

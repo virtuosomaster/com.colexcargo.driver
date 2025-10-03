@@ -1,0 +1,86 @@
+<ion-header [translucent]="true" id="dark_backgrounded" class="ion-no-border">
+  <ion-toolbar color="clear">
+    <ion-buttons slot="secondary" style="width:100%;">
+      <ion-menu-button color="primary"></ion-menu-button>
+      <!-- <ion-button (click)="goToShipments()">
+        <ion-icon name="arrow-undo-circle-outline" color="primary"></ion-icon>
+      </ion-button> -->
+      <ion-title color="primary"><img id="app-logo" class="inner-page" src="../../assets/images/logo.png" alt="Site Logo"
+          height="35px"></ion-title>
+      <!-- <ion-searchbar class="custom-search" debounce="500" color="light" (search)="onSearchShipment()"
+        (ionClear)="onClear()" (ionInput)="onInput( )" placeholder="Buscar Envío" showCancelButton="never"
+        [(ngModel)]="search"></ion-searchbar> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin ion-padding">
+  <div id="content-inner">
+    <section class="main-page">
+      <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher> -->
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <img class="driver-image" src="../../../assets/images/driver-image.png" alt="Driver Image" width="150px">
+          </ion-col>
+          <ion-col size="12" class="ion-text-center">
+            <p class="text-large ion-text-uppercase">{{userData.fullname}}</p>
+          </ion-col>
+          <ion-col size="12">
+            <div class="ion-text-center">
+              <ion-button class="ion-text-uppercase" expand="full" (click)="logout()" color="tertiary"><ion-icon
+                  name="log-out-outline"></ion-icon> Logout</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid class="grid-with-background ion-no-padding">
+        <ion-row class="row-with-background ion-align-items-center">
+          <ion-col size="12">
+            <h5 class="white ion-text-uppercase">Account Details</h5>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center padded-row">
+          <ion-col size="12" class="padded-row">
+            <div class="text-label-flex">
+              <p class="text-label-small ion-text-uppercase">Fullname</p>
+              <p *ngIf="driverFullData['fullname']" class="text-label-big">{{driverFullData['fullname']}}</p>
+              <p *ngIf="!driverFullData['fullname']" class="text-label-big">N/A</p>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" class="padded-row">
+            <div class="text-label-flex">
+              <p class="text-label-small ion-text-uppercase">Address</p>
+              <p *ngIf="driverFullData['address']" class="text-label-big">{{driverFullData['address']}}</p>
+              <p *ngIf="!driverFullData['address']" class="text-label-big">N/A</p>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" class="padded-row">
+            <div class="text-label-flex">
+              <p class="text-label-small ion-text-uppercase">Email Address</p>
+              <p *ngIf="driverFullData['email']" class="text-label-big">{{driverFullData['email']}}</p>
+              <p *ngIf="!driverFullData['email']" class="text-label-big">N/A</p>
+            </div>
+          </ion-col>
+
+          <ion-col size="12" class="padded-row">
+            <div class="text-label-flex">
+              <p class="text-label-small ion-text-uppercase">Phone Number</p>
+              <p *ngIf="driverFullData['phone']" class="text-label-big">{{driverFullData['phone']}}</p>
+              <p *ngIf="!driverFullData['phone']" class="text-label-big">N/A</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </section>
+  </div>
+</ion-content>

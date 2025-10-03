@@ -1,0 +1,147 @@
+<ion-content *ngIf="!canUpdate">
+  <div class="ion-text-center" style="margin-top: 60px;">
+    <ion-icon name="alert" color="danger" style="font-size: 4em;"></ion-icon>
+    <ion-text color="danger">
+      <h3>Error 405</h3>
+      <p>{{errMessage}}</p>
+    </ion-text>
+    <ion-button color="primary" (click)="goToShipments()"><ion-icon name="return-down-back-outline"></ion-icon>
+      Back</ion-button>
+  </div>
+</ion-content>
+<ion-header *ngIf="canUpdate">
+  <ion-toolbar color="primary">
+    <ion-title>{{ shipmentData.shipment_number }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="canUpdate && !onProcess">
+  <ion-card>
+    <ion-card-header color="secondary" (click)="hideShipper()">
+      <span class="ion-float-left">Shipper Details </span><ion-icon [name]="viewShipperIcon" class="ion-float-right"
+        color="light"></ion-icon>
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top" *ngIf="viewShipper == true">
+      <p *ngFor="let field of shipperFields">{{field.value}}: {{shipmentData[field.key]}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="secondary" (click)="hideReceiver()">
+      Receiver Details <ion-icon [name]="viewReceiverIcon" class="ion-float-end" color="light"></ion-icon>
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top" *ngIf="viewReceiver == true">
+      <p *ngFor="let field of receiverFields">{{field.value}}: {{shipmentData[field.key]}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="secondary" (click)="hidePackage()">
+      Package Details <ion-icon [name]="viewPackageIcon" class="ion-float-end" color="light"></ion-icon>
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top" *ngIf="viewPackage == true">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="header">QTY</ion-col>
+          <ion-col class="header">Type</ion-col>
+          <ion-col class="header">Description</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let package of shipmentFullData['shipment_packages'] | keyvalue">
+
+          <ion-col>{{package.value['wpc-pm-qty']}}</ion-col>
+          <ion-col>{{package.value['wpc-pm-piece-type']}}</ion-col>
+          <ion-col>{{package.value['wpc-pm-description']}}</ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="secondary">
+      Signature
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top" *ngIf="postData.signature != null">
+      <ion-icon color="danger" class="ion-float-right" name="trash-outline" (click)="removeSignature()"></ion-icon>
+      <img src="{{ postData.signature }}" alt="signature">
+    </ion-card-content>
+    <ion-button *ngIf="postData.signature == null" expand="full" color="light"
+      (click)="presentModal()">Sign</ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="secondary">
+      Images
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top">
+
+      <ion-button expand="block" color="primary" fill="outline" size="small" (click)="takeSnap()">
+        <ion-icon name="camera-outline" class="ion-margin-end"></ion-icon> Take Photo
+      </ion-button>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let img of capturedSnapURL; let i = index">
+            <ion-icon name="trash" class="trash-image" (click)="removeImage(i)"></ion-icon>
+            <ion-img [src]="img"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <form>
+
+    <ion-list id="autocomplete-wrapper">
+      <ion-item *ngFor="let field of signFields | keyvalue">
+
+        <ion-label position="stacked">{{field.value['label']}}</ion-label>
+
+
+
+
+
+        <ion-input *ngIf="field.value['field'] == 'text' && field.key == 'location'" type="text" name="{{field.key}}"
+          [(ngModel)]="postData[field.key]"></ion-input>
+
+        <ion-select *ngIf="field.value['field'] == 'select'" placeholder="Select One" name="{{field.key}}"
+          okText="Select" cancelText="Dismiss" [(ngModel)]="postData[field.key]">
+          <ion-select-option *ngFor="let option of field.value['options'] | keyvalue"
+            value="{{option.value}}">{{option.value}}</ion-select-option>
+        </ion-select>
+
+        <ion-textarea *ngIf="field.value['field'] == 'textarea'" name="{{field.key}}"
+          [(ngModel)]="postData[field.key]"></ion-textarea>
+
+
+      </ion-item>
+
+    </ion-list>
+
+
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col size="6">
+          <ion-button expand="full" color="danger" (click)="goToShipments()"><ion-icon class="ion-padding-end"
+              name="return-down-back-outline"></ion-icon> Back</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full" color="success" (click)="submitAction()"><ion-icon class="ion-padding-end"
+              name="save-outline"></ion-icon> Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-content *ngIf="onProcess">
+  <div class="ion-text-center ion-margin-vertical">
+    <ion-text color="warning">
+      <ion-spinner name="dots"></ion-spinner>
+      <p>Processing request...</p>
+    </ion-text>
+  </div>
+</ion-content>

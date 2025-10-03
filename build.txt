@@ -1,0 +1,36 @@
+ ionic build
+ionic cap add android
+ionic cap copy
+npx capacitor-assets generate android
+npx cap sync
+ionic cap open ios
+
+
+
+
+ionic cap  build --release android
+change into the /android folder and 
+It open android studio   build bundle 
+or  run ./gradlew bundleRelease
+
+
+keytool -genkey -v -keystore wpcargo-driver-key.keystore -alias com.kdexpress.driver -keyalg RSA -keysize 2048 -validity 10000
+
+Is CN=Kevin Le , OU=Logistics, O=KDExpress, L=Vancouver , ST=BC, C=CA correct?
+Modial23
+
+Keyalias
+WPCARGO_DRIVER_APP
+keypassword
+ModialWPCARGO23
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore wpcargo-driver-key.keystore app-release.aab com.kdexpress.driver
+
+
+zipalign -v 4 app-release.aab KDExpressDriver2.1.aab
+
+
+I fixed it by deleting node_modules, package-lock.json directly from project directory. Clean cache by running command npm cache clean --force. Now try npm i.
+
+

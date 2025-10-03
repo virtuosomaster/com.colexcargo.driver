@@ -1,0 +1,60 @@
+<ion-app>
+  <!-- <ion-split-pane when = "(min-width:2500px)"> -->
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content class="padded-menu">
+      <ion-list id="inbox-list">
+        <img id="app-logo" src="../../../assets/images/logo.png" alt="Site Logo">
+        <ion-menu-toggle autoHide="true" *ngFor="let p of appPages; let i = index">
+          <ion-item [routerLink]="[p.url]" routerLinkActive="selected" routerDirection="root" lines="none"
+            detail="false">
+            <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item (click) ="openURL('https://colexcargo.com/')">
+            <ion-icon slot="start" name="home" color="secondary"></ion-icon>
+            <ion-label>
+              Colex Cargo Website
+            </ion-label>
+          </ion-item>
+
+          <ion-item (click) ="openURL('https://colexcargo.com/')">
+            <ion-icon slot="start" name="newspaper" color="secondary"></ion-icon>
+            <ion-label>
+              Privacy Policy
+            </ion-label>
+          </ion-item>
+
+          <ion-item (click) ="openURL('https://colexcargo.com/')">
+            <ion-icon slot="start" name="chatbox-ellipses" color="secondary"></ion-icon>
+            <ion-label>
+              FAQ’S
+            </ion-label>
+          </ion-item>
+
+          <ion-item (click) ="openURL('https://colexcargo.com/')">
+            <ion-icon slot="start" name="receipt" color="secondary"></ion-icon>
+            <ion-label>
+              Terms and Conditions
+            </ion-label>
+          </ion-item>
+
+          <ion-item (click) ="openURL('https://colexcargo.com/prices')">
+            <ion-icon slot="start" name="pricetags" color="secondary"></ion-icon>
+            <ion-label>
+              Rates
+            </ion-label>
+          </ion-item>
+
+          <ion-item (click)="logout()" color="primary">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+  <!-- </ion-split-pane> -->
+</ion-app>

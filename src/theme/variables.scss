@@ -1,0 +1,1166 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+
+// ==================================================================== //
+//== ALL CUSTOM THEMING WITH THE WPCARGO CUSTOMER CAN BE FOUND HERE ===
+// ==================================================================== //
+
+//General
+:root {
+    --ion-color-primary: #1a1e3a !important;
+    --ion-color-primary-rgb: 0, 102, 0;
+    --ion-color-primary-contrast: #e7fff9;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #1a1e3a;
+    --ion-color-primary-tint: #1a1e3a;
+
+    --ion-color-secondary: #efad43 !important;
+    --ion-color-secondary-rgb: 0, 102, 0;
+    --ion-color-secondary-contrast: #e7fff9;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #efad43;
+    --ion-color-secondary-tint: #efad43;
+
+    --ion-color-tertiary: #d34242 !important;
+    --ion-color-tertiary-rgb: 0, 102, 0;
+    --ion-color-tertiary-contrast: #e7fff9;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #1b1f1d;
+    --ion-color-tertiary-tint: #b91f1f;
+
+    --ion-color-text: #002211 !important;
+    --ion-color-text-rgb: 0, 102, 0;
+    --ion-color-text-contrast: #e7fff9;
+    --ion-color-text-contrast-rgb: 255, 255, 255;
+    --ion-color-text-shade: #1a1e3a;
+    --ion-color-text-tint: #1a1e3a;
+
+    --ion-color-white: #e7fff9 !important;
+    --ion-color-white-rgb: 0, 102, 0;
+    --ion-color-white-contrast: #1a1e3a;
+    --ion-color-white-contrast-rgb: 255, 255, 255;
+    --ion-color-white-shade: #e7fff9;
+    --ion-color-white-tint: #e7fff9;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../assets/fonts/Raleway-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Handlee';
+    src: url('../assets/fonts/Handlee-Regular.ttf');
+}
+
+/* logo optionals */
+img#app-logo {
+    width: 30%;
+}
+img#app-logo.inner-page {
+    width: 25%;
+    height: auto;
+    padding: 5px 0px;
+}
+div#logo-with-text img {
+    width: 50%;
+}
+
+.logo-white{
+    width:81%;
+    max-width:81%;
+}
+/* End of Temp CSS */
+/* General CSS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ion-label {
+    font-family: 'Raleway' !important;
+    margin: 0 !important;
+    line-height: normal !important;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: min(6vw, 20px);
+}
+
+h4 {
+    font-size: min(4vw, 15px);
+}
+
+h5 {
+    font-size: min(4vw, 15px);
+    font-weight: 600;
+    color: var(--ion-color-text);
+}
+
+.text-label-small {
+    font-size: min(3vw, 12px);
+    color: var(--ion-color-primary);
+}
+
+.text-large {
+    color: var(--ion-color-text);
+    font-weight: 600;
+}
+
+.error-message {
+    color: #c5000f;
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+ion-loading {
+    --background: var(--ion-color-primary-contrast) !important;
+    --spinner-color: var(--ion-color-primary) !important;
+    color: var(--ion-color-primary) !important;
+}
+
+ion-title {
+    text-align: center;
+}
+
+
+//Splash Page
+ion-content.backgrounded {
+    --background: url("../assets/images/banner-overlayed.png") no-repeat center center / cover;
+    text-align: center;
+}
+
+.bold{
+    font-weight: 900;
+}
+
+.splash-inner-div,
+.ion-text-center.splash-inner-text {
+    overflow: hidden;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.splash-inner-div {
+    height: 34vh;
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.splash-inner-div img {
+    height: 100%;
+    width: auto !important;
+}
+
+section.wpc-homesplash-background {
+    padding: 20px;
+    padding-top:50px;
+}
+
+.ion-text-center.splash-inner-text {
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+//login page
+div#content-wrapper\ full-height-center {
+    height: 100vh;
+}
+
+div#logo-with-text {
+    background: url("../assets/images/banner-overlayed.png") no-repeat center center / cover;
+    height: 40vh;
+    padding: 20px;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 50px 50px;
+}
+
+.welcome-text-main {
+    background: #fff;
+    border-radius: 100px 0 0 0;
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+    height: 100vh;
+}
+
+.welcome-text-main img {
+    text-align: center;
+    margin: 0 auto;
+}
+
+section#section-main-content {
+    text-align: left;
+}
+
+.underlined {
+    padding: 10px;
+    border: 1px solid #106d391f;
+    margin: 10px;
+}
+
+.create-shipment .underlined {
+    padding: 0 5px;
+    border: 1px solid #106d391f;
+    margin: 0 5px;
+}
+
+ion-grid.underlined .native-wrapper {
+    padding: 0 10px !important;
+}
+
+
+/***********************************
+*****   CUSTOM TAB *****************
+***********************************/
+
+ion-tabs#tab-backgrounded {
+    // background: #ff3b25;
+    background: var(--ion-color-primary);
+    border: 0 !important;
+}
+
+ion-icon.horizon-icons {
+    color: var(--ion-color-white);
+    font-size: 20px;
+}
+
+ion-tab-bar.ion-tab-heightened.md.hydrated {
+    height: 60px !important;
+    border: 0 !important;
+    background: transparent !important;
+    align-items: flex-end;
+    padding-bottom: 5px;
+}
+
+.ion-no-background {
+    background: var(--ion-color-primary) !important;
+    height: 40px;
+}
+
+.tab-selected .horizon-icons {
+    color: var(--ion-color-primary) !important;
+    position: absolute;
+    top: -50%;
+    background: var(--ion-color-secondary);
+    border: 3px solid var(--ion-color-primary);
+    padding: 5px;
+    border-radius: 100%;
+    font-size: 25px;
+}
+
+.ion-tab-heightened .tab-selected::part(native) {
+    overflow: visible !important;
+}
+
+.tab-selected {
+    border-bottom: 15px solid var(--ion-color-primary) !important;
+}
+
+ion-tab-bar.ion-tab-heightened.ios.hydrated {
+    // background: var(--ion-color-primary);
+    height: 55px;
+    align-items: flex-end;
+}
+
+ion-toolbar.ion-color.ion-color-clear.ios.in-toolbar.hydrated.toolbar-searchbar,
+.header-ios ion-toolbar:last-of-type {
+    --border: 0 !important;
+    --border-width: 0 !important;
+}
+
+ion-tab-bar.ion-tab-heightened.ion-color.ion-color-clear.ios.hydrated {
+    border: 0 !important;
+}
+
+// TOP MENU
+.padded-menu ion-list#inbox-list {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.padded-menu #app-logo {
+    margin: 20px;
+}
+
+
+//Dasdhboard
+.greetings {
+    display: flex;
+    align-items: center;
+}
+
+.greetings ion-icon {
+    margin: 5px;
+}
+
+.shipment-dashboard {
+    background: url("../assets/images/dashboard-banner-overlayed.png") no-repeat center center / cover;
+    min-height: 200px;
+    border-radius: 20px;
+}
+
+.shipment-dashboard .greetings {
+    flex-direction: column;
+    align-items: flex-start;
+    width:50%;
+}
+
+.shipment-dashboard h4,
+.shipment-dashboard h3 {
+    color: var(--ion-color-white);
+}
+
+.shipment-dashboard h4,
+.shipment-dashboard ion-button {
+    max-width: 70%;
+    font-weight: 200;
+    padding: 10px 0;
+    font-size: min(3vw, 13px);
+}
+
+.grid-with-background ion-grid {
+    border-radius: 20px;
+    background: var(--ion-color-primary-contrast);
+}
+
+.grid-with-background ion-grid ion-icon {
+    color: var(--ion-color-primary);
+    font-size: min(10vw, 40px);
+}
+
+.grid-with-background ion-grid ion-button {
+    max-width: 70%;
+    font-weight: 200;
+    padding: 10px 0;
+    font-size: min(3vw, 13px);
+}
+
+.display-latest-details {
+    box-shadow: 2px 2px 2px #f1f1f1;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 20px;
+}
+
+.display-latest-details ion-icon {
+    color: var(--ion-color-primary);
+}
+
+p.package-details {
+    font-size: min(3vw, 12px);
+    color: var(--ion-color-secondary);
+}
+
+.tracking-record {
+    padding: 10px;
+    position: relative;
+    min-height: 50px;
+}
+
+.mopving-truck {
+    // background: var(--ion-color-primary-contrast);
+    border-bottom: 1px solid var(--ion-color-secondary);
+    padding: 5px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons p {
+    margin: 5px !important;
+    border: 1px solid var(--ion-color-secondary);
+    padding: 5px;
+}
+
+// body {
+//     background-color: rgba(195, 205, 212, 1)
+// }
+
+.travel {
+    position: absolute;
+    top: 10px;
+    width: 80%;
+    z-index: 1;
+}
+
+.carbody {
+    display: flex;
+}
+
+.carbody-1 {
+    background-color: var(--ion-color-primary-tint);
+    border-bottom: 2px solid var(--ion-color-primary-shade);
+    border-radius: 2px;
+    height: 25px;
+    width: 50px;
+    box-shadow: 2px 4px 2px 2px #cecece;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carbody-2 {
+    background-color: var(--ion-color-text-shade);
+    border-bottom: 2px solid var(--ion-color-text-tint);
+    border-right: 2px solid var(--ion-color-text-tint);
+    border-radius: 2px;
+    height: 15px;
+    width: 15px;
+    align-self: flex-end;
+    box-shadow: 2px 4px 2px 2px #cecece;
+}
+
+.carcycle {
+    display: flex;
+}
+
+.carcycle-1 {
+    background-color: var(--ion-color-text-tint);
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    box-shadow: 2px 4px 2px 2px #cecece;
+}
+
+.carcycle-2 {
+    background-color: var(--ion-color-text-tint);
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    align-self: end;
+    margin-left: 40px;
+    box-shadow: 2px 4px 2px 2px #cecece;
+}
+
+.road {
+    bottom: 0;
+    position: absolute;
+    width: 95%;
+    color: #FBB400;
+    border-bottom: 3px dashed var(--ion-color-primary);
+}
+
+.car {
+    //infinite
+    position: absolute;
+    width: min-content;
+    -webkit-animation: move 20s infinite;
+    -moz-animation: move 20s infinite;
+    -ms-animation: move 20s infinite;
+    -o-animation: move 20s infinite;
+    animation: move 20s infinite;
+}
+
+.travel-inner {
+    position: absolute;
+    top: 10px;
+    width: 80%;
+    z-index: 1;
+    right: -50%;
+}
+
+p.small-text {
+    color: var(--ion-color-white);
+    font-size: 7px;
+    font-weight: 600;
+}
+
+ion-icon.pickup-point {
+    font-size: min(7vw, 30px);
+}
+
+ion-icon.dropoff-point {
+    font-size: min(7vw, 30px);
+    position: absolute;
+    right: 0;
+}
+
+/* Routes */
+section.map {
+    position: relative;
+    height: 60vh;
+    // margin: 0 10px;
+    box-shadow: 2px 2px 5px 2px #e5e5e5;
+}
+
+@-webkit-keyframes move {
+    from {
+        left: 5%
+    }
+
+    to {
+        left: 87%
+    }
+}
+
+.details.content-1 {
+    width: 100%;
+}
+
+
+/* Shipment Page */
+.row-with-background {
+    background: var(--ion-color-primary-contrast);
+    padding: 5px 10px;
+}
+
+ion-grid.grid-with-background {
+    margin: 20px 0;
+}
+
+.padded-row {
+    padding: 5px 10px;
+}
+
+.tbl th,
+.tbl td {
+    border: 1px solid var(--ion-color-primary);
+    padding: 5px;
+}
+
+.tbl {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.tbl th {
+    background-color: var(--ion-color-primary-contrast);
+}
+
+.details-section {
+    padding: 5px 20px;
+    box-shadow: 2px 2px 2px #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 20px;
+}
+
+/* Create Shipment */
+.tbl-wrapper {
+    overflow-x: scroll;
+}
+
+/*Support Desk*/
+.tab-nav {
+    border: 1px solid var(--ion-color-primary-contrast);
+    margin: 0px;
+}
+
+.tab-active {
+    background-color: var(--ion-color-primary-contrast);
+}
+
+.tab-content-img img {
+    max-width: min(7vw, 50px);
+    margin: 5px 10px;
+}
+
+.tab-content-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab-nav h3 {
+    color: var(--ion-color-primary);
+    font-size: min(4vw, 18px);
+}
+
+.tab-active h3 {
+    font-weight: 700;
+}
+
+.details-support {
+    display: flex;
+}
+
+.img-0 {
+    flex: 0 0 30%;
+    padding: 10px;
+    background: var(--ion-color-primary-contrast);
+    margin: 0 5px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.with-badge {
+    position: absolute;
+    top: 0;
+    border-radius: 15px !important;
+    left: 0;
+}
+
+.with-badge ion-badge {
+    border-radius: 10px !important;
+}
+
+.img-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+    background: var(--ion-color-primary-contrast);
+}
+
+.img-input-container img {
+    max-width: min(6vw, 30px);
+    margin: 0 15px;
+}
+
+.img-container {
+    padding: 5px;
+    border: 1px solid #f1f1f1;
+    box-shadow: 1px 1px 2px 2px #f1f1f1;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.file-indicator {
+    max-width: min(4vw, 20px);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.comment-content {
+    border-bottom: 1px dashed var(--ion-color-primary);
+}
+
+p.display-text-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-list#searhed-list {
+    background: transparent;
+    padding: 0 !important;
+}
+
+ion-list#searhed-list ion-item {
+    font-size: 12px !important;
+    height: auto;
+}
+
+@-moz-keyframes move {
+    from {
+        left: 5%
+    }
+
+    to {
+        left: 87%
+    }
+}
+
+@-ms-keyframes move {
+    from {
+        left: 5%
+    }
+
+    to {
+        left: 87%
+    }
+}
+
+@-o-keyframes move {
+    from {
+        left: 5%
+    }
+
+    to {
+        left: 87%
+    }
+}
+
+@keyframes move {
+    from {
+        left: 5%
+    }
+
+    to {
+        left: 87%
+    }
+}
+
+// input focus
+.has-focus.sc-ion-input-md-h input.sc-ion-input-md,
+.has-focus.sc-ion-textarea-md-h textarea.sc-ion-textarea-md {
+    caret-color: var(--ion-color-primary) !important;
+}
+.input-highlight.sc-ion-input-md,
+.textarea-highlight.sc-ion-textarea-md {
+    background-color: var(--ion-color-primary) !important;
+}
+
+// //General CSS
+// @font-face {
+//     font-family: 'Dosis';
+//     src: url('../assets/fonts/Raleway-VariableFont_wght.ttf');
+// }
+
+// @font-face {
+//     font-family: 'Handlee';
+//     src: url('../assets/fonts/Handlee-Regular.ttf');
+// }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// p,
+// ion-label {
+//     font-family: 'Dosis' !important;
+//     margin: 0 !important;
+//     line-height: normal !important;
+// }
+
+// ion-label,
+// ion-input,
+// ion-select {
+//     font-size: min(4vw, 20px) !important;
+// }
+
+// .header-background {
+//     backdrop-filter: unset !important;
+// }
+
+// h1.green {
+//     font-size: min(13vw, 80px);
+//     font-family: 'Dosis';
+//     font-weight: 700;
+//     color: #172267;
+//     line-height: normal;
+//     margin: 0;
+// }
+
+// h1.dark-blue {
+//     font-size: min(7vw, 50px);
+//     font-weight: 700;
+//     color: #172267;
+// }
+
+// h5.black {
+//     font-size: min(8vw, 50px);
+//     font-weight: 300;
+// }
+
+// h5.white {
+//     font-size: min(4vw, 15px);
+//     font-weight: 700;
+//     color: #fff !important
+// }
+
+// ion-grid.grid-with-background {
+//     background: #f3f3f3;
+//     margin: 20px 0;
+//     box-shadow: 2px 2px 5px 1px #e5e5e5;
+// }
+
+// ion-row.row-with-background {
+//     background: #76acff;
+//     padding: 10px !important;
+// }
+
+// section.inner-list {
+//     margin: 10px 0;
+// }
+
+// .text-large {
+//     color: #001ab8;
+//     font-weight: 700;
+//     font-size: min(5vw, 18px);
+// }
+
+// .text-small {
+//     color: #001ab8;
+//     font-weight: 400;
+//     font-size: min(4vw, 16px);
+//     margin-bottom: 10px !important;
+// }
+
+// .padded-row {
+//     padding: 5px 10px;
+// }
+
+// p.regular-text {
+//     font-family: 'Dosis';
+//     font-size: min(4vw, 20px);
+//     padding: 10%;
+// }
+
+// .padded-left-right {
+//     padding: 5px !important;
+// }
+
+// .padded-left-right p {
+//     margin: 0 !important;
+// }
+
+// #content-wrapper {
+//     padding: 10% !important;
+// }
+
+// #content-inner {
+//     padding: 20px !important;
+// }
+
+// .welcome-text {
+//     padding: 10% 0;
+// }
+
+// ion-grid.underlined {
+//     border-bottom: 1px solid #737373;
+//     margin: 5% 0;
+// }
+
+// ion-input,
+// ion-select {
+//     min-height: 30px !important;
+//     font-family: 'Dosis' !important;
+// }
+
+// .input-icon {
+//     padding: 10%;
+//     width: min(6vw, 40px);
+//     filter: invert(46%) sepia(10%) saturate(16%) hue-rotate(3deg) brightness(94%) contrast(86%);
+// }
+
+// #content-wrapper {
+//     max-width: 1024px;
+//     margin: 0 auto;
+// }
+
+// img.logout {
+//     max-width: min(8vw, 40px);
+//     border: 1px solid #000;
+//     padding: 2%;
+//     border-radius: 100px;
+//     filter: invert(100%) sepia(0%) saturate(1%) hue-rotate(144deg) brightness(105%) contrast(101%);
+// }
+
+// #dark_backgrounded {
+//     background: #2437c9 !important;
+// }
+
+// .ion-no-background {
+//     background: transparent !important;
+// }
+
+// input.searchbar-input.sc-ion-searchbar-ios {
+//     font-family: 'Dosis' !important;
+// }
+
+// ion-searchbar {
+//     padding: 10px !important;
+// }
+
+// .header-ios ion-toolbar:last-of-type {
+//     --border-width: 0 !important;
+// }
+
+// img.tab_icon {
+//     width: min(5vw, 25px);
+//     filter: invert(100%) sepia(0%) saturate(1%) hue-rotate(144deg) brightness(105%) contrast(101%);
+// }
+
+// .tab-labels {
+//     color: #fff;
+//     font-weight: 300;
+//     font-size: min(3.5vw, 15px) !important;
+// }
+
+// ion-loading {
+//     --background: #cdd3ff !important;
+//     --spinner-color: #76acff !important;
+//     color: #76acff !important;
+// }
+
+// .wpc-button-sm-green {
+//     --background: #2d42df;
+//     --border-radius: 5px !important;
+//     font-family: 'Dosis' !important;
+//     font-size: min(3vw, 16px);
+//     font-weight: 700 !important;
+//     --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+//     --ripple-color: rgb(20, 122, 255);
+// }
+
+// .wpc-button-sm-red {
+//     --background: #cc1e1e;
+//     --border-radius: 5px !important;
+//     font-family: 'Dosis' !important;
+//     font-size: min(3vw, 16px);
+//     font-weight: 700 !important;
+//     --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+//     --ripple-color: rgb(20, 122, 255);
+// }
+
+// .wpc-button-sm-blue {
+//     --background: #76acff;
+//     --border-radius: 5px !important;
+//     font-family: 'Dosis' !important;
+//     font-size: min(3vw, 16px);
+//     font-weight: 700 !important;
+//     --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+//     --ripple-color: rgb(20, 122, 255);
+// }
+
+// .wpc-button-sm-light {
+//     --background: #f3f3f3;
+//     --border-radius: 5px !important;
+//     font-family: 'Dosis' !important;
+//     font-size: min(3vw, 16px);
+//     font-weight: 700 !important;
+//     color: #001ab8;
+//     --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+//     --ripple-color: #001ab8;
+// }
+
+// .inner-buttons {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end;
+// }
+
+// .light-blue-indented {
+//     background: #f3f3f3;
+//     padding: 10px;
+// }
+
+// p.label-sm-bold {
+//     color: #001ab8;
+//     font-weight: 600;
+// }
+
+// p.label-sm-indented {
+//     color: #001ab8;
+//     padding-left: 10px !important;
+// }
+
+// img.item-icon {
+//     max-width: min(5vw, 30px);
+//     filter: invert(13%) sepia(28%) saturate(2856%) hue-rotate(181deg) brightness(98%) contrast(101%);
+// }
+
+// .item-detail {
+//     display: flex;
+//     align-items: center;
+//     padding: 10px;
+// }
+
+// .parcel-details {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// .no-result-found {
+//     width: 75%;
+//     margin: 10% auto;
+//     min-height: 20vw;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     background: #f3f3f3;
+//     padding: 20px;
+// }
+
+// .no-result-found ion-text {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+//     font-size: min(6vw, 40px);
+//     font-family: 'Dosis';
+//     font-weight: bolder;
+//     text-transform: uppercase;
+// }
+
+// .no-result-found ion-icon {
+//     width: min(10vw, 90px) !important;
+//     height: min(10vw, 90px) !important;
+// }
+
+// p.text-label-flex {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .text-label-small {
+//     color: #001ab8;
+//     font-size: min(3vw, 12px);
+//     font-weight: 700;
+// }
+
+// .text-label-big {
+//     color: #001ab8;
+//     font-weight: 700;
+//     font-size: min(5vw, 18px);
+//     padding-left: 10px;
+// }
+
+// table#package_fields {
+//     width: 95%;
+//     /* text-align: center; */
+//     margin: 15px auto !important;
+// }
+
+// table#package_fields th,
+// td {
+//     text-align: center;
+//     padding: 5px !important;
+// }
+
+// table#history th {
+//     background: #fff;
+//     padding: 5px;
+//     border-bottom: 1px solid #e1e1e1;
+// }
+
+// table#history {
+//     margin: 20px auto;
+//     width: 95%;
+// }
+
+// table#history td {
+//     border-bottom: 1px solid #e1e1e1;
+//     padding: 5px;
+// }
+
+// /********************************************
+// ACCOUNT PAGE
+// ********************************************/
+// img.driver-image {
+//     width: min(20vw, 200px);
+// }
+
+// /*************************************
+//  // Homepage
+//  ************************************/
+
+// div#logo-with-text img {
+//     width: auto;
+//     height: 100px;
+//     box-shadow: 1px 1px 5px 1px #efefef;
+//     border-radius: 10px;
+//     padding: 5px;
+//     background: #fff !important;
+// }
+
+// .backgrounded {
+//     --background: url('../assets/images/backgound-3.jpg') 0 0/100% 100% no-repeat;
+// }
+
+// div#main-content-backgrounded {
+//     margin: 5%;
+//     height: 600px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .wpc-button-green {
+//     --background: #2d42df !important;
+//     width: min(50vw, 300px);
+//     font-weight: 700;
+//     font-family: 'Dosis' !important;
+//     font-size: min(4vw, 25px);
+// }
+
+// .wpc-button-blue {
+//     --background: #2d42df !important;
+//     width: min(50vw, 300px);
+//     font-weight: 700;
+//     font-family: 'Dosis' !important;
+//     font-size: min(4vw, 25px);
+// }
+
+// /****************************************
+// // LOGIN
+// ****************************************/
+// h4.smaller-text {
+//     color: #737373;
+//     font-weight: 700;
+//     font-size: min(4vw, 30px);
+// }
+
+// h3.bigger-text {
+//     color: #737373;
+//     font-weight: 700;
+//     font-size: min(6vw, 45px);
+// }
+
+// .label-bold {
+//     font-weight: 700;
+//     color: #737373;
+// }
+
+
+// /***************************
+// MAP
+// ***************************/
+// section.map {
+//     position: relative;
+//     height: 60vh;
+//     // margin: 0 10px;
+//     box-shadow: 2px 2px 5px 2px #e5e5e5;
+// }
+
+// ion-checkbox {
+//     --size: 15px;
+//     --checkbox-background-checked: #f8c1ca;
+// }
+
+// ion-checkbox::part(container) {
+//     border-radius: 5px;
+//     border: 1px solid #ba0120;
+// }
+
+// p.checkbox-label {
+//     font-size: min(3vw, 14px);
+//     color: #ba0120;
+//     font-weight: 500;
+// }
+
+// .checkbox-icon path {
+//     stroke: #ba0120 !important;
+// }
+
+// .boxed-input {
+//     margin: 5px 0;
+//     padding: 5px !important;
+//     border: 1px solid #e1e1e1;
+// }
