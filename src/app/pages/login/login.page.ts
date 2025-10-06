@@ -62,7 +62,13 @@ export class LoginPage implements OnInit {
           // Check if response is NOT an ERROR
           if (res.type != 'error') {
             // Check is User is a Client
+            
+            let userRoles = res.user.role_slugs || [];
 
+            if(userRoles && Array.isArray(userRoles) && !userRoles.includes('wpcargo_driver')) {
+              this.toasterService.presentToast('Not enough permission. Please try again.', 'danger');
+              return;
+            }
 
             const userData = res.user;
             userData["apiKey"] = res.api;
